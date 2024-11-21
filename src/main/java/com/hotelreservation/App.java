@@ -28,7 +28,7 @@ public class App extends Application {
 
     public static void showLoginView() throws IOException {
         logger.info("Showing login view");
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("login-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/hotelreservation/login-view.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -38,10 +38,8 @@ public class App extends Application {
 
     public static void showMainView(Staff authenticatedStaff) throws IOException {
         logger.info("Showing main view for staff: {}", authenticatedStaff.getStaffId());
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/hotelreservation/main-view.fxml"));
         Parent root = loader.load();
-        MainViewController controller = loader.getController();
-        controller.setCurrentStaff(authenticatedStaff);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Hotel Reservation System");
