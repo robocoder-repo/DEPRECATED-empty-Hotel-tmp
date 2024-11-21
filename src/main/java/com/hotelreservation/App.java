@@ -1,7 +1,7 @@
-
 package com.hotelreservation;
 
 import com.hotelreservation.model.Staff;
+import com.hotelreservation.view.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,6 +40,8 @@ public class App extends Application {
         logger.info("Showing main view for staff: {}", authenticatedStaff.getStaffId());
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/hotelreservation/main-view.fxml"));
         Parent root = loader.load();
+        MainViewController controller = loader.getController();
+        controller.setCurrentStaff(authenticatedStaff);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Hotel Reservation System");
