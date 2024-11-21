@@ -1,4 +1,3 @@
-
 package com.hotelreservation.service;
 
 import com.hotelreservation.model.Staff;
@@ -9,7 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LoginService {
+    private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     public Staff authenticateStaff(String staffId, String password) {
         String sql = "SELECT * FROM Staffs WHERE staffId = ? AND password = ?";
@@ -33,7 +36,7 @@ public class LoginService {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error authenticating staff", e);
         }
         
         return null;

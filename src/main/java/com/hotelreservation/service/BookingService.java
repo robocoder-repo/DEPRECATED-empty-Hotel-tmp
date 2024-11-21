@@ -1,4 +1,3 @@
-
 package com.hotelreservation.service;
 
 import com.hotelreservation.model.Booking;
@@ -9,8 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingService {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class BookingService {
+    private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
     private GuestService guestService;
 
     public BookingService() {
@@ -40,7 +42,7 @@ public class BookingService {
                 bookings.add(booking);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error fetching all bookings", e);
         }
 
         return bookings;
@@ -72,7 +74,7 @@ public class BookingService {
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error creating booking", e);
             return false;
         }
     }
@@ -115,7 +117,7 @@ public class BookingService {
                 return booking;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error fetching booking with guest info", e);
         }
 
         return null;
@@ -139,10 +141,8 @@ public class BookingService {
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error updating booking", e);
             return false;
         }
     }
-
-    // Add more methods for deleting bookings as needed
 }
